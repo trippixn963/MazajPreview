@@ -11,7 +11,12 @@ that never stops — for a **10,700-member** community.
 
 <img src="assets/divider.png" width="440" alt="">
 
-`Python 3.12` &nbsp;·&nbsp; `discord.py` &nbsp;·&nbsp; `Lavalink` &nbsp;·&nbsp; `WebSocket` &nbsp;·&nbsp; `React` &nbsp;·&nbsp; `TypeScript`
+<img src="https://img.shields.io/badge/Python-3.12-C9A227?style=for-the-badge&logo=python&logoColor=C9A227&labelColor=0B0F0C" alt="Python 3.12">
+<img src="https://img.shields.io/badge/discord.py-2.7-C9A227?style=for-the-badge&logo=discord&logoColor=C9A227&labelColor=0B0F0C" alt="discord.py 2.7">
+<img src="https://img.shields.io/badge/Lavalink-v4-C9A227?style=for-the-badge&labelColor=0B0F0C" alt="Lavalink v4">
+<img src="https://img.shields.io/badge/WebSocket-live-C9A227?style=for-the-badge&labelColor=0B0F0C" alt="WebSocket">
+<img src="https://img.shields.io/badge/React-19-C9A227?style=for-the-badge&logo=react&logoColor=C9A227&labelColor=0B0F0C" alt="React 19">
+<img src="https://img.shields.io/badge/TypeScript-5-C9A227?style=for-the-badge&logo=typescript&logoColor=C9A227&labelColor=0B0F0C" alt="TypeScript 5">
 
 **[Live station page →](https://trippixn.com/Mazaj)**
 
@@ -22,8 +27,8 @@ that never stops — for a **10,700-member** community.
 <div align="center">
 
 Mazaj is a private bot for [discord.gg/syria](https://discord.gg/syria). This is
-a preview of how it's built — the source, its configuration and its audio stay
-private. Every code excerpt below is verbatim from the running system.
+a preview of what it does and how it's put together — the source, its
+configuration and its audio library stay private.
 
 **~8,600 lines Python** · **~6,100 lines TypeScript** · 22 modules · zero slash commands
 
@@ -75,53 +80,6 @@ somebody spoke; it cannot read a word of it.
 
 <img src="assets/divider.png" width="100%" alt="">
 
-## <img src="assets/icon-terminal.png" width="22" align="top"> &nbsp;Engineering notes
-
-Two failure modes caught in production, and the fixes that hold now. Both are
-the kind of bug that reports itself as healthy, which is why they're worth
-writing down.
-
-**The node lied about being alive.** During a real Lavalink outage,
-`node.status` kept reporting `CONNECTED` long after the socket died — so every
-recovery path built on it was a no-op while the station sat silent claiming
-health. Fixed by probing instead of asking:
-
-```python
-async def alive(self) -> bool:
-    """Actively probe the node. The ONLY trustworthy liveness signal.
-
-    Costs one cheap REST call. Worth it: the alternative is trusting a
-    status field that has been observed lying for as long as the node
-    stayed down.
-    """
-```
-
-The result is **tri-state**. `None` means *not yet probed*, because the
-supervisor sleeps a full sweep before its first check — and a plain `False`
-there reported a healthy station as stopped for the first thirty seconds of
-every restart, which is exactly the half-minute someone watching a recovery is
-looking at.
-
-**A wait that never waited.** The panel follows chat, floored at six seconds so
-a burst doesn't become a delete-and-repost per line. `asyncio.Event.wait()` on
-an already-set event returns **immediately** — and the event was only cleared
-when a move actually happened. So during the floor, exactly when the code
-believed it was throttling, the loop spun and edited the panel at rate-limiter
-speed. On an unresolvable channel it spun with *no await at all*, blocking the
-event loop, audio included. One event was doing two jobs:
-
-```python
-# Two separate things, deliberately. The Event is EDGE-triggered: it
-# exists only to wake the tick early and is consumed once per pass.
-# _pending_move is the LEVEL state that survives the sticky floor.
-self._activity: asyncio.Event = asyncio.Event()
-self._pending_move: bool = False
-```
-
-Measured after: **1 pass in 6 seconds**, down from thousands.
-
-<img src="assets/divider.png" width="100%" alt="">
-
 ## <img src="assets/icon-bars.png" width="22" align="top"> &nbsp;The station page
 
 `trippixn.com/Mazaj` renders live state from a WebSocket the bot serves on
@@ -138,23 +96,6 @@ designed states read off that contract:
 | **Last heard** | Values hold but drain amber → sage; the clock stops rather than being extrapolated |
 | **Off air** | Bot down, API up — the dead-air timer becomes the loudest number on the panel |
 | **No answer** | Every band and label stays; all values render as dashes |
-
-<img src="assets/divider.png" width="100%" alt="">
-
-## <img src="assets/icon-note.png" width="22" align="top"> &nbsp;Design
-
-Every glyph is generated, not downloaded — rendered headless at 4× and
-downsampled, on a six-stop gold ramp with a clipped inner bevel.
-
-- **A ramp between two yellows has no light source in it** — which is why the
-  first pass read as mustard. Gold needs a near-white specular and a deep
-  bronze, on a diagonal.
-- **The shadow must be warm.** A cool shadow under warm metal is the tell that
-  makes a render look like a yellow sticker.
-- **Detail is cut out, not drawn on.** Holes stay legible at 24px; painted-on
-  detail is the first thing to vanish.
-- **Fill the canvas.** Discord can't scale an emoji up, so internal padding is
-  the only reason a glyph ever reads small — all cropped and re-padded to 92%.
 
 <img src="assets/divider.png" width="100%" alt="">
 
