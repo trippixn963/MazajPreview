@@ -11,12 +11,9 @@ that never stops — for a **10,700-member** community.
 
 <img src="assets/divider.png" width="440" alt="">
 
-<img src="https://img.shields.io/badge/Python-3.12-C9A227?style=for-the-badge&logo=python&logoColor=C9A227&labelColor=0B0F0C" alt="Python 3.12">
-<img src="https://img.shields.io/badge/discord.py-2.7-C9A227?style=for-the-badge&logo=discord&logoColor=C9A227&labelColor=0B0F0C" alt="discord.py 2.7">
-<img src="https://img.shields.io/badge/Lavalink-v4-C9A227?style=for-the-badge&labelColor=0B0F0C" alt="Lavalink v4">
-<img src="https://img.shields.io/badge/WebSocket-live-C9A227?style=for-the-badge&labelColor=0B0F0C" alt="WebSocket">
-<img src="https://img.shields.io/badge/React-19-C9A227?style=for-the-badge&logo=react&logoColor=C9A227&labelColor=0B0F0C" alt="React 19">
-<img src="https://img.shields.io/badge/TypeScript-5-C9A227?style=for-the-badge&logo=typescript&logoColor=C9A227&labelColor=0B0F0C" alt="TypeScript 5">
+<p>
+<img src="https://img.shields.io/badge/Python-3.12-C9A227?style=for-the-badge&logo=python&logoColor=C9A227&labelColor=0B0F0C" alt="Python 3.12"><img src="https://img.shields.io/badge/discord.py-2.7-C9A227?style=for-the-badge&logo=discord&logoColor=C9A227&labelColor=0B0F0C" alt="discord.py 2.7"><img src="https://img.shields.io/badge/Lavalink-v4-C9A227?style=for-the-badge&labelColor=0B0F0C" alt="Lavalink v4"><img src="https://img.shields.io/badge/React-19-C9A227?style=for-the-badge&logo=react&logoColor=C9A227&labelColor=0B0F0C" alt="React 19"><img src="https://img.shields.io/badge/TypeScript-5-C9A227?style=for-the-badge&logo=typescript&logoColor=C9A227&labelColor=0B0F0C" alt="TypeScript 5">
+</p>
 
 **[Live station page →](https://trippixn.com/Mazaj)**
 
