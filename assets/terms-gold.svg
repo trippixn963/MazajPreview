@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+     role="img" aria-labelledby="mz-terms-title">
+  <title id="mz-terms-title">Terms of Service</title>
+  <defs>
+    <linearGradient id="mz-terms-gold" x1=".18" y1="0" x2=".82" y2="1">
+      <stop offset="0%" stop-color="#fff6d5"/>
+      <stop offset="8%" stop-color="#f2d888"/>
+      <stop offset="26%" stop-color="#dcb945"/>
+      <stop offset="50%" stop-color="#c99f2c"/>
+      <stop offset="74%" stop-color="#ab801a"/>
+      <stop offset="100%" stop-color="#7d5c0c"/>
+    </linearGradient>
+    <linearGradient id="mz-terms-sheen" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity=".50"/>
+      <stop offset="34%" stop-color="#fff" stop-opacity=".09"/>
+      <stop offset="52%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="78%" stop-color="#5a3f05" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#3d2a05" stop-opacity=".34"/>
+    </linearGradient>
+    <clipPath id="mz-terms-clip"><path d="M4.3 1.5 h7.4 a.85.85 0 0 1 .85.85 v11.3 a.85.85 0 0 1 -.85.85 h-7.4 a.85.85 0 0 1 -.85-.85 V2.35 a.85.85 0 0 1 .85-.85 Z M5.75 4.75 h4.5 v1.25 h-4.5 Z M5.75 7.4 h4.5 v1.25 h-4.5 Z M5.75 10.05 h3 v1.25 h-3 Z" fill-rule="evenodd"/></clipPath>
+    <filter id="mz-terms-bevel" x="-40%" y="-40%" width="180%" height="180%">
+      <feOffset in="SourceAlpha" dy="-.4" result="u"/>
+      <feGaussianBlur in="u" stdDeviation=".32" result="ub"/>
+      <feComposite in="ub" in2="SourceAlpha" operator="out" result="dark"/>
+      <feFlood flood-color="#4a3206" flood-opacity=".9"/>
+      <feComposite in2="dark" operator="in" result="darkIn"/>
+      <feOffset in="SourceAlpha" dy=".36" result="dn"/>
+      <feGaussianBlur in="dn" stdDeviation=".28" result="dnb"/>
+      <feComposite in="dnb" in2="SourceAlpha" operator="out" result="lite"/>
+      <feFlood flood-color="#fff4cf" flood-opacity=".8"/>
+      <feComposite in2="lite" operator="in" result="liteIn"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="darkIn"/>
+        <feMergeNode in="liteIn"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#mz-terms-clip)">
+    <g filter="url(#mz-terms-bevel)">
+      <path d="M4.3 1.5 h7.4 a.85.85 0 0 1 .85.85 v11.3 a.85.85 0 0 1 -.85.85 h-7.4 a.85.85 0 0 1 -.85-.85 V2.35 a.85.85 0 0 1 .85-.85 Z M5.75 4.75 h4.5 v1.25 h-4.5 Z M5.75 7.4 h4.5 v1.25 h-4.5 Z M5.75 10.05 h3 v1.25 h-3 Z" fill="url(#mz-terms-gold)" fill-rule="evenodd"/>
+    </g>
+    <rect width="16" height="16" fill="url(#mz-terms-sheen)"/>
+    <ellipse cx="5.4" cy="3.1" rx="5.2" ry="2.9" fill="#fff" opacity=".19"
+             transform="rotate(-24 5.4 3.1)"/>
+  </g>
+  <path d="M4.3 1.5 h7.4 a.85.85 0 0 1 .85.85 v11.3 a.85.85 0 0 1 -.85.85 h-7.4 a.85.85 0 0 1 -.85-.85 V2.35 a.85.85 0 0 1 .85-.85 Z M5.75 4.75 h4.5 v1.25 h-4.5 Z M5.75 7.4 h4.5 v1.25 h-4.5 Z M5.75 10.05 h3 v1.25 h-3 Z" fill="none" stroke="#120c02" stroke-width=".32"
+        stroke-linejoin="round" fill-rule="evenodd"/>
+</svg>

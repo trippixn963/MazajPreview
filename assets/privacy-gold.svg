@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+     role="img" aria-labelledby="mz-privacy-title">
+  <title id="mz-privacy-title">Privacy Policy</title>
+  <defs>
+    <linearGradient id="mz-privacy-gold" x1=".18" y1="0" x2=".82" y2="1">
+      <stop offset="0%" stop-color="#fff6d5"/>
+      <stop offset="8%" stop-color="#f2d888"/>
+      <stop offset="26%" stop-color="#dcb945"/>
+      <stop offset="50%" stop-color="#c99f2c"/>
+      <stop offset="74%" stop-color="#ab801a"/>
+      <stop offset="100%" stop-color="#7d5c0c"/>
+    </linearGradient>
+    <linearGradient id="mz-privacy-sheen" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity=".50"/>
+      <stop offset="34%" stop-color="#fff" stop-opacity=".09"/>
+      <stop offset="52%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="78%" stop-color="#5a3f05" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#3d2a05" stop-opacity=".34"/>
+    </linearGradient>
+    <clipPath id="mz-privacy-clip"><path d="M8 1.15 L13.7 3.35 V8.15 C13.7 11.6 11.25 14.2 8 15.1 C4.75 14.2 2.3 11.6 2.3 8.15 V3.35 Z M8 5.5 A1.7 1.7 0 0 0 7.1 8.65 L6.55 11.45 h2.9 L8.9 8.65 A1.7 1.7 0 0 0 8 5.5 Z" fill-rule="evenodd"/></clipPath>
+    <filter id="mz-privacy-bevel" x="-40%" y="-40%" width="180%" height="180%">
+      <feOffset in="SourceAlpha" dy="-.4" result="u"/>
+      <feGaussianBlur in="u" stdDeviation=".32" result="ub"/>
+      <feComposite in="ub" in2="SourceAlpha" operator="out" result="dark"/>
+      <feFlood flood-color="#4a3206" flood-opacity=".9"/>
+      <feComposite in2="dark" operator="in" result="darkIn"/>
+      <feOffset in="SourceAlpha" dy=".36" result="dn"/>
+      <feGaussianBlur in="dn" stdDeviation=".28" result="dnb"/>
+      <feComposite in="dnb" in2="SourceAlpha" operator="out" result="lite"/>
+      <feFlood flood-color="#fff4cf" flood-opacity=".8"/>
+      <feComposite in2="lite" operator="in" result="liteIn"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="darkIn"/>
+        <feMergeNode in="liteIn"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#mz-privacy-clip)">
+    <g filter="url(#mz-privacy-bevel)">
+      <path d="M8 1.15 L13.7 3.35 V8.15 C13.7 11.6 11.25 14.2 8 15.1 C4.75 14.2 2.3 11.6 2.3 8.15 V3.35 Z M8 5.5 A1.7 1.7 0 0 0 7.1 8.65 L6.55 11.45 h2.9 L8.9 8.65 A1.7 1.7 0 0 0 8 5.5 Z" fill="url(#mz-privacy-gold)" fill-rule="evenodd"/>
+    </g>
+    <rect width="16" height="16" fill="url(#mz-privacy-sheen)"/>
+    <ellipse cx="5.4" cy="3.1" rx="5.2" ry="2.9" fill="#fff" opacity=".19"
+             transform="rotate(-24 5.4 3.1)"/>
+  </g>
+  <path d="M8 1.15 L13.7 3.35 V8.15 C13.7 11.6 11.25 14.2 8 15.1 C4.75 14.2 2.3 11.6 2.3 8.15 V3.35 Z M8 5.5 A1.7 1.7 0 0 0 7.1 8.65 L6.55 11.45 h2.9 L8.9 8.65 A1.7 1.7 0 0 0 8 5.5 Z" fill="none" stroke="#120c02" stroke-width=".32"
+        stroke-linejoin="round" fill-rule="evenodd"/>
+</svg>

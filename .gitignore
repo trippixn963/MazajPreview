@@ -1,0 +1,25 @@
+# This repository must never carry anything operational. The bot's real
+# source lives elsewhere and privately; these patterns exist so a stray
+# copy can't be committed by accident.
+
+.env
+.env.*
+*.log
+logs/
+data/
+audio/
+*.mp3
+*.m4a
+*.flac
+*.ogg
+*.opus
+*.wav
+
+# Python, in case a snippet is ever run locally
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# macOS
+.DS_Store
