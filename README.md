@@ -25,12 +25,7 @@ Mazaj is a private bot for [discord.gg/syria](https://discord.gg/syria). This is
 a preview of how it's built — the source, its configuration and its audio stay
 private. Every code excerpt below is verbatim from the running system.
 
-| | |
-|:--|:--|
-| **Always on** | Resumes mid-track across restarts · rebuilds its own voice connection · self-restarts when its audio node dies unrecoverably |
-| **Zero commands** | One dropdown. No slash surface to abuse, no permissions to audit |
-| **Own frontend** | ~8,600 lines Python · ~6,100 lines TypeScript · 22 modules |
-| **Out of process** | Lavalink does the decoding and Opus encoding — the bot never sits in the audio path |
+**~8,600 lines Python** · **~6,100 lines TypeScript** · 22 modules · zero slash commands
 
 </div>
 
@@ -117,10 +112,10 @@ somebody spoke; it cannot read a word of it.
 
 ## <img src="assets/icon-terminal.png" width="22" align="top"> &nbsp;Two problems worth writing down
 
-**The node lied about being alive.** wavelink exposes `node.status`. During a
-real Lavalink outage it kept reporting `CONNECTED` long after the socket died —
-so every recovery path built on it was a no-op, and the station sat silent while
-claiming to be healthy. The fix was to stop asking and start probing:
+**The node lied about being alive.** During a real Lavalink outage,
+`node.status` kept reporting `CONNECTED` long after the socket died — so every
+recovery path built on it was a no-op while the station sat silent claiming
+health. Fixed by probing instead of asking:
 
 ```python
 async def alive(self) -> bool:
@@ -132,27 +127,19 @@ async def alive(self) -> bool:
     """
 ```
 
-That result is **tri-state**, not boolean. `None` means *not yet probed* —
-because the supervisor sleeps a full sweep before its first check, and a plain
-`False` there meant the API reported a healthy station as stopped for the first
-thirty seconds of every restart. Which is exactly the half-minute somebody
-watching a recovery is looking at.
+The result is **tri-state**. `None` means *not yet probed*, because the
+supervisor sleeps a full sweep before its first check — and a plain `False`
+there reported a healthy station as stopped for the first thirty seconds of
+every restart, which is exactly the half-minute someone watching a recovery is
+looking at.
 
 **A wait that never waited.** The panel follows chat, floored at six seconds so
-a burst doesn't become a delete-and-repost per line. The floor worked; the sleep
-did not:
-
-```python
-await asyncio.wait_for(self._activity.wait(), timeout=delay)
-```
-
-`asyncio.Event.wait()` on an already-set event returns **immediately**, and the
-event was only cleared when a move actually happened. So during the floor —
-exactly when the code believed it was throttling — the loop spun, editing the
-panel at whatever rate the rate-limiter allowed. On an unresolvable channel it
-spun with *no await at all*, blocking the entire event loop, audio included.
-
-One event was doing two jobs:
+a burst doesn't become a delete-and-repost per line. `asyncio.Event.wait()` on
+an already-set event returns **immediately** — and the event was only cleared
+when a move actually happened. So during the floor, exactly when the code
+believed it was throttling, the loop spun and edited the panel at rate-limiter
+speed. On an unresolvable channel it spun with *no await at all*, blocking the
+event loop, audio included. One event was doing two jobs:
 
 ```python
 # Two separate things, deliberately. The Event is EDGE-triggered: it
@@ -183,9 +170,6 @@ designed states read off that contract:
 | **Off air** | Bot down, API up — the dead-air timer becomes the loudest number on the panel |
 | **No answer** | Every band and label stays; all values render as dashes |
 
-The playhead interpolates on the rail — a continuous quantity — and never
-interpolates the clock, which is a sampled fact.
-
 <img src="assets/divider.png" width="100%" alt="">
 
 ## <img src="assets/icon-note.png" width="22" align="top"> &nbsp;Design
@@ -199,21 +183,15 @@ interpolates the clock, which is a sampled fact.
 Every glyph is generated, not downloaded — rendered headless at 4× and
 downsampled, on a six-stop gold ramp with a clipped inner bevel.
 
-- **A ramp between two yellows has no light source in it.** That's why the first
-  pass read as mustard: real gold needs a near-white specular and a deep bronze,
-  on a diagonal.
+- **A ramp between two yellows has no light source in it** — which is why the
+  first pass read as mustard. Gold needs a near-white specular and a deep
+  bronze, on a diagonal.
 - **The shadow must be warm.** A cool shadow under warm metal is the tell that
   makes a render look like a yellow sticker.
 - **Detail is cut out, not drawn on.** Holes stay legible at 24px; painted-on
   detail is the first thing to vanish.
 - **Fill the canvas.** Discord can't scale an emoji up, so internal padding is
-  the only reason a glyph ever reads small — everything is cropped and re-padded
-  to 92%.
-
-The progress bar is six emoji with rounded end caps and a repeating middle, so
-it reads as a bar rather than a row of blocks. It's deliberately *not* wrapped in
-backticks: custom emoji don't render inside inline code, a detail that cost a
-redesign to find.
+  the only reason a glyph ever reads small — all cropped and re-padded to 92%.
 
 <img src="assets/divider.png" width="100%" alt="">
 
