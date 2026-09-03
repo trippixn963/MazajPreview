@@ -31,54 +31,19 @@ private. Every code excerpt below is verbatim from the running system.
 
 <img src="assets/divider.png" width="100%" alt="">
 
-## <img src="assets/icon-note.png" width="22" align="top"> &nbsp;The station
-
 <div align="center">
 
-<img src="assets/panel.png" width="700" alt="Mazaj control panel">
+|  |  |  |
+|:-:|:-:|:-:|
+| <img src="assets/tile-panel.png" width="290"> | <img src="assets/tile-selector.png" width="290"> | <img src="assets/tile-profile.png" width="290"> |
+| **The panel** — gold progress bar, running timer, and the last person to change the track | **The library** — bilingual labels and real durations, one swap per person every ten minutes | **The profile** — banner mirrored from a live server-stats render shared with a sibling bot |
+
+|  |  |
+|:-:|:-:|
+| <img src="assets/tile-welcome.png" width="450"> | <img src="assets/tile-status.png" width="450"> |
+| **Arrivals** — mentioned on the way in, never on the way out. Self-deletes after ten minutes | **Status and presence** — sixteen bilingual mood lines, mirrored so the two can never drift |
 
 </div>
-
-A live Components V2 card: fixed art, a gold progress bar built from six custom
-emoji, a running timer, and a footer crediting whoever last changed the track.
-It refreshes every eight seconds and **re-posts itself below new messages**, so
-it's always the last thing in the channel.
-
-<div align="center">
-
-<img src="assets/selector.png" width="700" alt="Track selector">
-
-</div>
-
-Bilingual labels, real durations read off the loaded files. One swap per person
-every ten minutes — a single dropdown changes what the whole room hears.
-
-<img src="assets/divider.png" width="100%" alt="">
-
-## <img src="assets/icon-moon.png" width="22" align="top"> &nbsp;Presence
-
-<div align="center">
-
-<img src="assets/welcome.png" width="740" alt="Welcome card">
-
-</div>
-
-Mentioned on the way in, never on the way out. Listening time accumulates across
-restarts, and the figure is hidden entirely on a first visit — `0s` is a worse
-greeting than none. Self-deletes after ten minutes.
-
-<div align="center">
-
-<img src="assets/voice.png" width="420" alt="Voice channel status">
-&nbsp;&nbsp;&nbsp;
-<img src="assets/presence.png" width="290" alt="Rich presence">
-
-</div>
-
-Sixteen bilingual mood lines rotate on the channel status. The rich presence
-**mirrors** whichever is showing rather than rotating on its own clock — two
-timers would drift and display different moods at once. Idle, not online: the
-moon is what a station sitting quietly looks like.
 
 <img src="assets/divider.png" width="100%" alt="">
 
@@ -110,7 +75,11 @@ somebody spoke; it cannot read a word of it.
 
 <img src="assets/divider.png" width="100%" alt="">
 
-## <img src="assets/icon-terminal.png" width="22" align="top"> &nbsp;Two problems worth writing down
+## <img src="assets/icon-terminal.png" width="22" align="top"> &nbsp;Engineering notes
+
+Two failure modes caught in production, and the fixes that hold now. Both are
+the kind of bug that reports itself as healthy, which is why they're worth
+writing down.
 
 **The node lied about being alive.** During a real Lavalink outage,
 `node.status` kept reporting `CONNECTED` long after the socket died — so every
@@ -173,12 +142,6 @@ designed states read off that contract:
 <img src="assets/divider.png" width="100%" alt="">
 
 ## <img src="assets/icon-note.png" width="22" align="top"> &nbsp;Design
-
-<div align="center">
-
-<img src="assets/profile.png" width="600" alt="Bot profile">
-
-</div>
 
 Every glyph is generated, not downloaded — rendered headless at 4× and
 downsampled, on a six-stop gold ramp with a clipped inner bevel.
