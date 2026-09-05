@@ -98,7 +98,9 @@ designed states read off that contract:
 
 <div align="center">
 
-Built by **Trippixn** &nbsp;·&nbsp; [trippixn.com](https://trippixn.com) &nbsp;·&nbsp; [discord.gg/syria](https://discord.gg/syria)
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/mark-dark.png"><img alt="Trippixn" src="assets/mark-light.png" width="30"></picture>
+
+Built by **[Trippixn](https://trippixn.com)** &nbsp;·&nbsp; [discord.gg/syria](https://discord.gg/syria)
 
 <img src="assets/divider.png" width="440" alt="">
 
